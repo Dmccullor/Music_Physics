@@ -1,25 +1,28 @@
-var sampleRate = 3000
+var sampleRate = 2000;
 var frequency = 440;
 //var amplitude = 0.01;
 
 var timeArr = [];
 
-for (var i = 0; i < sampleRate; i++) {
-  timeArr.push(i + 0.01);
+
+for (var i = 0; i <= sampleRate; i++) {
+  timeArr.push(i * 0.001);
 }
+
+console.log(timeArr);
   
 
 function makeSine(freq, amp) {
   let sineArr = []
-  for (var j = 0; j < sampleRate; j++) {
-    sineArr.push(amp * Math.sin(((2 * Math.PI) * (1/freq)) * j));
+  for (var j = 0; j <= sampleRate; j++) {
+    sineArr.push(amp * Math.sin(((2 * Math.PI) * freq) * timeArr[j]));
   }
   return sineArr;
 }
 
-var sineWave = makeSine(440, 0.01);
-var octaveWave = makeSine(880, 0.015);
-var fifthWave = makeSine(660, 0.012);
+var sineWave = makeSine(2, 30);
+var octaveWave = makeSine(4, 15);
+var fifthWave = makeSine(3, 23);
 
 console.log(sineWave)
 
@@ -32,14 +35,16 @@ var trace1 = {
 
 var trace2 = {
   x: timeArr,
-  y: fifthWave,
-  type: "scatter"
+  y: octaveWave,
+  type: "scatter",
+  opacity: 0.25
 };
 
 var trace3 = {
   x: timeArr,
-  y: octaveWave,
-  type: "scatter"
+  y: fifthWave,
+  type: "scatter",
+  opacity: 0.5
 }
   
 
