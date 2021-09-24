@@ -8,8 +8,18 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
+<div class="row">
+    <div class="col-md-2">
+        <div class="well">
+            <h4>Select a note:</h4>
+        <select id="selNote" onchange="optionChanged(this.value)"></select>
+        </div>
+    </div>
+</div>
     <div id="plot"></div>
-    <!-- <script src="data.js"></script> -->
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
     <script src="logic.js"></script>
 </body>
 </html>

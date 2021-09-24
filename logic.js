@@ -1,17 +1,18 @@
-var notes = [{"C": 261.626},{"C#/Db": 277.183}, {"D": 293.665}, {"D#/Eb": 311.127},
-  {"E": 329.628}, {"F": 349.228}, {"F#/Gb": 369.994}, {"A": 440}, {"A#/Bb": 466.164},
-{"B": 493.883}];
+function init() {
+  optionChanged(notes.C)
+};
+
+var notes = {"C": 261.626, "C#/Db": 277.183, "D": 293.665, "D#/Eb": 311.127,
+"E": 329.628, "F": 349.228, "F#/Gb": 369.994, "A": 440, "A#/Bb": 466.164,
+"B": 493.883};
 
 var sampleRate = 2000;
 
 var timeArr = [];
 
-
 for (var i = 0; i <= sampleRate; i++) {
   timeArr.push(i * 0.001);
 }
-
-console.log(timeArr);
   
 
 function makeSine(freq, amp) {
@@ -22,20 +23,34 @@ function makeSine(freq, amp) {
   return sineArr;
 }
 
-var sineWave = makeSine(256, 30);
-var octaveWave = makeSine(512, 15);
-var fifthWave = makeSine(384, 23);
-var thirdWave = makeSine(320, 27)
+var selector = d3.select("#selNote");
 
-console.log(sineWave)
+Object.entries(notes).forEach(([key, value]) => {
+  selector
+    .append("option")
+    .text(key)
+    .property("value", value);
+});
 
-// Create our first trace
+function optionChanged(newNote) {
+  var dropDownMenu = d3.selectAll("#selNote").node();
+  var dropDownMenuId = dropDownMenu.id;
+  var selectedFreq = dropDownMenu.value;
+  
+  var rootWave = makeSine(selectedFreq, 30);
+  var octaveWave = makeSine((selectedFreq *2), 15);
+  var fifthWave = makeSine(((selectedFreq * 3)/2), 23);
+  var thirdWave = makeSine(((selectedFreq * 5)/4), 26)
+
+
+// Create root note trace
 var trace1 = {
   x: timeArr,
-  y: sineWave,
+  y: rootWave,
   type: "scatter",
   name: "Root Note"
 };
+
 
 var trace2 = {
   x: timeArr,
@@ -58,17 +73,20 @@ var trace4 = {
   y: thirdWave,
   type: "scatter",
   name: "Third",
-  opacity: 0.75
+  opacity: 0.5
 }
   
 
-var data = [trace1, trace4, trace3, trace2];
+var data = [trace1, trace2, trace3, trace4];
 
 var layout = {
   title: "<b>Musical Note Sinewaves</b>",
   xaxis: {title: {text: "Time (ms)"}},
-  yaxis: {title: {text: "Decibels"}}
+  yaxis: {title: {text: "Amplitude"}}
 };
   
 
 Plotly.newPlot("plot", data, layout);
+}
+
+init();
