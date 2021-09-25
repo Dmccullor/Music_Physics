@@ -42,8 +42,8 @@ function optionChanged(newNote) {
   
   var rootWave = makeSine(selectedFreq, 30);
   var octaveWave = makeSine((selectedFreq *2), 20);
-  var fifthWave = makeSine(((selectedFreq * 3)/2), 23);
-  var thirdWave = makeSine(((selectedFreq * 5)/4), 26)
+  var fifthWave = makeSine(((selectedFreq * 3)/2), 25);
+  var thirdWave = makeSine(((selectedFreq * 5)/4), 27)
 
 
 // Create root note trace
@@ -96,31 +96,34 @@ Plotly.newPlot("plot", data, layout);
 var fifthBox = d3.select("#myCheckBox");
 var thirdBox = d3.select("#myCheckBox2");
 
-console.log(fifthBox);
-
 var update = {
   opacity: 0.25
 };
 
-function replot() {
+var update2 = {
+  opacity: 0
+}
+
+function replotFifth() {
+
   if (fifthBox.property("checked")) {
-  Plotly.restyle("plot", update, 2)
-  }
-  else if (thirdBox.property("checked")) {
-    Plotly.restyle("plot", update, 3)
-  }
-  else if ((fifthBox.property("checked")) && (thirdBox.property("checked"))) {
-    Plotly.restyle("plot", update, [2, 3])
-  }
-  else if ((fifthBox.property("unchecked")) && (thirdBox.property("checked"))) {
-    Plotly.restyle("plot", update, 3)
+    Plotly.restyle("plot", update, 2);
   }
   else {
-    init();
+    Plotly.restyle("plot", update2, 2);
   }
 };
 
-d3.select("#myCheckBox").on("change", replot);
-d3.select("#myCheckBox2").on("change", replot);
+function replotThird() {
+  if (thirdBox.property("checked")) {
+    Plotly.restyle("plot", update, 3);
+  }
+  else {
+    Plotly.restyle("plot", update2, 3);
+  }
+}
+
+d3.select("#myCheckBox").on("change", replotFifth);
+d3.select("#myCheckBox2").on("change", replotThird);
 
 init();
