@@ -9,17 +9,23 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-4">
         <div class="well">
             <h4>Select a note:</h4>
         <select id="selNote" onchange="optionChanged(this.value)"></select>
         </div>
     </div>
 </div>
-    <div id="plot"></div>
+<div id="plot"></div>
+<div>
+    <input type="checkbox" id="myCheckBox" unchecked>
+    <label for="myCheckBox">Add the 5th</label>
+    <input type="checkbox" id="myCheckBox2" unchecked>
+    <label for="myCheckBox2">Add the 3rd</label>
+  </div>
     
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
-    <script src="logic.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+<script src="logic.js"></script>
 </body>
 </html>

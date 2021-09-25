@@ -32,13 +32,16 @@ Object.entries(notes).forEach(([key, value]) => {
     .property("value", value);
 });
 
+
+
+
 function optionChanged(newNote) {
   var dropDownMenu = d3.selectAll("#selNote").node();
   var dropDownMenuId = dropDownMenu.id;
   var selectedFreq = dropDownMenu.value;
   
   var rootWave = makeSine(selectedFreq, 30);
-  var octaveWave = makeSine((selectedFreq *2), 15);
+  var octaveWave = makeSine((selectedFreq *2), 20);
   var fifthWave = makeSine(((selectedFreq * 3)/2), 23);
   var thirdWave = makeSine(((selectedFreq * 5)/4), 26)
 
@@ -65,7 +68,7 @@ var trace3 = {
   y: fifthWave,
   type: "scatter",
   name: "Fifth",
-  opacity: 0.5
+  opacity: 0
 }
 
 var trace4 = {
@@ -73,20 +76,51 @@ var trace4 = {
   y: thirdWave,
   type: "scatter",
   name: "Third",
-  opacity: 0.5
+  opacity: 0
 }
-  
+
 
 var data = [trace1, trace2, trace3, trace4];
 
 var layout = {
   title: "<b>Musical Note Sinewaves</b>",
   xaxis: {title: {text: "Time (ms)"}},
-  yaxis: {title: {text: "Amplitude"}}
+  yaxis: {title: {text: "Amplitude"}},
+  hovermode: "closest"
 };
   
 
 Plotly.newPlot("plot", data, layout);
 }
+
+var fifthBox = d3.select("#myCheckBox");
+var thirdBox = d3.select("#myCheckBox2");
+
+console.log(fifthBox);
+
+var update = {
+  opacity: 0.25
+};
+
+function replot() {
+  if (fifthBox.property("checked")) {
+  Plotly.restyle("plot", update, 2)
+  }
+  else if (thirdBox.property("checked")) {
+    Plotly.restyle("plot", update, 3)
+  }
+  else if ((fifthBox.property("checked")) && (thirdBox.property("checked"))) {
+    Plotly.restyle("plot", update, [2, 3])
+  }
+  else if ((fifthBox.property("unchecked")) && (thirdBox.property("checked"))) {
+    Plotly.restyle("plot", update, 3)
+  }
+  else {
+    init();
+  }
+};
+
+d3.select("#myCheckBox").on("change", replot);
+d3.select("#myCheckBox2").on("change", replot);
 
 init();
