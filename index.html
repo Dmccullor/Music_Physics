@@ -6,8 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The Physics of Music</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 jumbotron text-center">
+            <h1>The Physics of Music</h1>
+            <p><br><br><br><br><b>An exploration of music through the lense of physics, music theory and neuroscience</b></p>
+          </div>
+        </div>
+<p style="font-size: 20px">Music is a fascinating phenomenon. Some say it was invented, other say it was discovered. The truth is a bit of both.
+    Music is found in various forms all over the world, but what is it really? And why does it sound good to us?
+    Let's take a look at some of the fundamentals.
+    <br><br>
+    When we hear sounds, we are hearing subtle changes in the pressure in the air around us. Musical notes are variations in the air pressure
+    that oscillate at a regular frequency. Our brains are pattern finding machines, so when we hear this stable vibration it sounds pleasurable to us.
+    The purest form of this vibration is called a <em>sine wave</em>. Take a look at the chart below to see what a graphical representation of a sine wave looks like.
+</p>
+<br><br>
+<img src="Images/sinewave.png" class="center">
+<br><br>
+<p style="font-size: 20px">The sine wave has two main properties: <em>pitch</em> and <em>amplitude</em>. The pitch is associated with the frequency of the oscillation.
+    For instance, the frequency of middle A is 440 Hz, or the number of times the vibration occurs in 1 second. The amplitude is how loud the note sounds to us.
+    When we double this frequency, we get 880 Hz. This is also A, but it is up one <em>octave</em>. The octave is the next instance of the note at the end of the <em>scale</em>.
+    Here is the scale that begins on the note C:
+</p>
+<br><br>
+<img src="Images/Cscale.png" width="400" class="center">
+<br><br>
+<p style="font-size: 20px">The C scale is easy to understand because it is the only scale that has no notes that are augmented with sharps(#) or flats(b).
+    We won't worry about that here. Instead let's focus on the <em>interval</em> between the notes in the scale. An interval refers to the space between two notes.
+    The octave is the interval between middle A and high A (or between middle C and high C) and is the interval with the most <em>consonance</em>.
+    The opposite of consonance is dissonance, which is basically a disharmony between the notes. Consonance and dissonance are not binary and the interplay between
+    them is what makes music interesting!
+<br><br>
+    So, now we know that the frequency for middle A is 440 Hz and its higher octave is 880 Hz. Halfway between the two is 660 Hz, which is the (perfect)5th note
+    in the scale. In this case, the 5th note would be E. This is next most consonant interval. Keep in mind that humans intuitively knew this before these frequencies
+    were ever measured. The arrangement and systems of notes were developed purely by how they sounded.
+<br><br>
+    The next most consonant interval in the A scale is C# with a freqency of 550 Hz. C#, in relation to A, is the (major)3rd. All of these notes played together
+    is called a major <em>chord</em>. The major chord of any note has the same intervals between the notes. The A major chord is A C# E A. The C major chord is C E G C.
+    Play around with the chart below to see how all of the notes look when mapped as a sine wave. Notice that the octave, which is shown by default, takes half the time
+    to make its oscillation (also known as the <em>period</em>) as the root note. Tick the checkboxes below the chart to add the 5th and 3rd sinewaves.
+    <br><br>
+    <b>Note: The frequency on the x-axis and amplitude on the y-axis are independent of one another, but have been adjusted for visual clarity.</b>
+</p>
+<br><br>
 <div class="row">
     <div class="col-md-4">
         <div class="well">
@@ -22,7 +68,8 @@
     <label for="myCheckBox">Add the 5th</label>
     <input type="checkbox" id="myCheckBox2" unchecked>
     <label for="myCheckBox2">Add the 3rd</label>
-  </div>
+</div>
+<br><br>
     
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>

@@ -96,13 +96,8 @@ Plotly.newPlot("plot", data, layout);
 var fifthBox = d3.select("#myCheckBox");
 var thirdBox = d3.select("#myCheckBox2");
 
-var update = {
-  opacity: 0.25
-};
-
-var update2 = {
-  opacity: 0
-}
+var update = {opacity: 0.25};
+var update2 = {opacity: 0};
 
 function replotFifth() {
 
