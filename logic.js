@@ -32,18 +32,34 @@ Object.entries(notes).forEach(([key, value]) => {
     .property("value", value);
 });
 
-
+var fifthBox = d3.select("#myCheckBox");
+var thirdBox = d3.select("#myCheckBox2");
 
 
 function optionChanged(newNote) {
+  fifthBox.property('checked', false);
+  thirdBox.property('checked', false);
+
   var dropDownMenu = d3.selectAll("#selNote").node();
   var dropDownMenuId = dropDownMenu.id;
   var selectedFreq = dropDownMenu.value;
+
+  var octaveFreq = selectedFreq * 2;
+  var fifthFreq = (selectedFreq *3) /2;
+  var thirdFreq = (selectedFreq *5) /4;
   
   var rootWave = makeSine(selectedFreq, 30);
-  var octaveWave = makeSine((selectedFreq *2), 20);
-  var fifthWave = makeSine(((selectedFreq * 3)/2), 25);
-  var thirdWave = makeSine(((selectedFreq * 5)/4), 27)
+  var octaveWave = makeSine(octaveFreq, 20);
+  var fifthWave = makeSine(fifthFreq, 25);
+  var thirdWave = makeSine(thirdFreq, 27)
+
+  var PANEL = d3.select("#frequency-panel");
+
+  PANEL.html("");
+  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 1000)/1000 + " Hz");
 
 
 // Create root note trace
@@ -67,7 +83,7 @@ var trace3 = {
   x: timeArr,
   y: fifthWave,
   type: "scatter",
-  name: "Fifth",
+  name: "",
   opacity: 0
 }
 
@@ -75,7 +91,7 @@ var trace4 = {
   x: timeArr,
   y: thirdWave,
   type: "scatter",
-  name: "Third",
+  name: "",
   opacity: 0
 }
 
@@ -93,32 +109,31 @@ var layout = {
 Plotly.newPlot("plot", data, layout);
 }
 
-var fifthBox = d3.select("#myCheckBox");
-var thirdBox = d3.select("#myCheckBox2");
 
-var update = {opacity: 0.25};
-var update2 = {opacity: 0};
+var updateFifth = {opacity: 0.25, name: "Fifth"};
+var updateHide = {opacity: 0, name: ""};
+var updateThird = {opacity: 0.25, name: "Third"}
 
 function replotFifth() {
 
   if (fifthBox.property("checked")) {
-    Plotly.restyle("plot", update, 2);
+    Plotly.restyle("plot", updateFifth, 2);
   }
   else {
-    Plotly.restyle("plot", update2, 2);
+    Plotly.restyle("plot", updateHide, 2);
   }
 };
 
 function replotThird() {
   if (thirdBox.property("checked")) {
-    Plotly.restyle("plot", update, 3);
+    Plotly.restyle("plot", updateThird, 3);
   }
   else {
-    Plotly.restyle("plot", update2, 3);
+    Plotly.restyle("plot", updateHide, 3);
   }
 }
 
-d3.select("#myCheckBox").on("change", replotFifth);
-d3.select("#myCheckBox2").on("change", replotThird);
+fifthBox.on("change", replotFifth);
+thirdBox.on("change", replotThird);
 
 init();
