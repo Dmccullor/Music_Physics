@@ -74,7 +74,7 @@
 <div id="plot"></div>
 <div>
     <input type="checkbox" id="myCheckBox" unchecked>
-    <label for="myCheckBox">Add the 5th</label>
+    <label for="myCheckBox">Add the 5th</label><br>
     <input type="checkbox" id="myCheckBox2" unchecked>
     <label for="myCheckBox2">Add the 3rd</label>
 </div>
@@ -99,7 +99,7 @@ Now let's see what the sine waves look like when chords are inverted.
     <div class="col-md-4">
         <div class="well">
             <h4>Select a note:</h4>
-        <select id="selectNote" onchange="optionChanged2(this.value)"></select>
+        <select id="selNote2" onchange="optionChanged2(this.value)"></select>
         </div>
     </div>
     <div class="col-md-2 col-md-offset-5">
@@ -114,11 +114,14 @@ Now let's see what the sine waves look like when chords are inverted.
 </div>
 <div id="plot2"></div>
 <div>
-    <input type="radio" id="fifthInversion" name="fifthInversion" value="fifthInversion">
-<label for="html">5th Inversion</label><br>
-<input type="radio" id="thirdInversion" name="thirdInversion" value="thirdInversion">
-<label for="css">3rd Inversion</label><br>
+    <input type="radio" id="standardChord" name="inversion" value="standardChord">
+    <label for="standardChord">Standard Chord</label><br>
+    <input type="radio" id="fifthInversion" name="inversion" value="fifthInversion">
+    <label for="fifthInvesion">5th Inversion</label><br>
+    <input type="radio" id="thirdInversion" name="inversion" value="thirdInversion">
+    <label for="thirdInversion">3rd Inversion</label><br>
 </div>
+<br><br>
 
 
     

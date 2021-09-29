@@ -1,6 +1,7 @@
 // Function to display defaults on the page when it loads
 function init() {
   optionChanged(notes.C)
+  optionChanged2(notes.C)
 };
 
 // Dict of notes and their frequencies
@@ -58,7 +59,7 @@ function optionChanged(newNote) {
   let rootWave = makeSine(selectedFreq, 30);
   let octaveWave = makeSine(octaveFreq, 20);
   let fifthWave = makeSine(fifthFreq, 25);
-  let thirdWave = makeSine(thirdFreq, 27)
+  let thirdWave = makeSine(thirdFreq, 27);
 
   // displays the frequency of each wave and rounds to 3 decimals
   let PANEL = d3.select("#frequency-panel");
@@ -75,7 +76,7 @@ var trace1 = {
   y: rootWave,
   type: "scatter",
   name: "Root Note"
-};
+}
 
 // creates octave trace
 var trace2 = {
@@ -84,7 +85,7 @@ var trace2 = {
   type: "scatter",
   name: "Octave",
   opacity: 0.25
-};
+}
 
 // creates fifth trace
 var trace3 = {
@@ -147,13 +148,187 @@ function replotThird() {
 fifthBox.on("change", replotFifth);
 thirdBox.on("change", replotThird);
 
-// // populates the dropdown menu from objects in notes dict
-// var selector2 = d3.select("#selectNote");
-// Object.entries(notes).forEach(([key, value]) => {
-//   selector
-//     .append("option")
-//     .text(key)
-//     .property("value", value);
-// });
+// populates the dropdown menu from objects in notes dict
+var selector2 = d3.select("#selNote2");
+Object.entries(notes).forEach(([key, value]) => {
+  selector2
+    .append("option")
+    .text(key)
+    .property("value", value);
+});
+
+// defines variables for radio buttons
+var standardBox = d3.select("#standardChord");
+var fifthInvBox = d3.select("#fifthInversion");
+var thirdInvBox = d3.select("#thirdInversion");
+
+function optionChanged2(newNote) {
+  // reads the selected option and defines the note and frequency as variables
+  let dropDownMenu = d3.selectAll("#selNote2").node();
+  let selectedFreq = dropDownMenu.value;
+  let octaveFreq = selectedFreq * 2;
+  
+  // builds y values based on the inversion selection
+  if(fifthInvBox.property("checked")) {
+    // halves the fifth frequency from standard chord
+    var fifthFreq = (selectedFreq *3) /4;
+    var thirdFreq = (selectedFreq *5) /4;
+
+    let rootWave = makeSine(selectedFreq, 27);
+    let octaveWave = makeSine(octaveFreq, 20);
+    let fifthWave = makeSine(fifthFreq, 30);
+    let thirdWave = makeSine(thirdFreq, 25);
+
+    // creates root note trace
+    var trace1 = {
+    x: timeArr,
+    y: rootWave,
+    type: "scatter",
+    name: "Root Note",
+    opacity: 0.25
+    }
+
+    // creates octave trace
+    var trace2 = {
+    x: timeArr,
+    y: octaveWave,
+    type: "scatter",
+    name: "Octave",
+    opacity: 0.25
+    }
+      
+    // creates fifth trace
+    var trace3 = {
+    x: timeArr,
+    y: fifthWave,
+    type: "scatter",
+    name: "Inv. Fifth"
+    }
+      
+    // creates third trace
+    var trace4 = {
+    x: timeArr,
+    y: thirdWave,
+    type: "scatter",
+    name: "Third",
+    opacity: 0.25
+    }
+  }
+  else if(thirdInvBox.property("checked")) {
+    //halves the third frequency from standard
+    var fifthFreq = (selectedFreq *3) /2;
+    var thirdFreq = (selectedFreq *5) /8;
+
+    // builds y values array
+    let rootWave = makeSine(selectedFreq, 27);
+    let octaveWave = makeSine(octaveFreq, 20);
+    let fifthWave = makeSine(fifthFreq, 25);
+    let thirdWave = makeSine(thirdFreq, 30);
+
+    // creates root note trace
+    var trace1 = {
+    x: timeArr,
+    y: rootWave,
+    type: "scatter",
+    name: "Root Note",
+    opacity: 0.25
+    }
+
+    // creates octave trace
+    var trace2 = {
+    x: timeArr,
+    y: octaveWave,
+    type: "scatter",
+    name: "Octave",
+    opacity: 0.25
+    }
+      
+    // creates fifth trace
+    var trace3 = {
+    x: timeArr,
+    y: fifthWave,
+    type: "scatter",
+    name: "Fifth",
+    opacity: 0.25
+    }
+      
+    // creates third trace
+    var trace4 = {
+    x: timeArr,
+    y: thirdWave,
+    type: "scatter",
+    name: "Inv. Third",
+    }
+  }
+  else {
+    //defines the frequency relationship
+    var fifthFreq = (selectedFreq *3) /2;
+    var thirdFreq = (selectedFreq *5) /4;
+  
+    let rootWave = makeSine(selectedFreq, 30);
+    let octaveWave = makeSine(octaveFreq, 20);
+    let fifthWave = makeSine(fifthFreq, 25);
+    let thirdWave = makeSine(thirdFreq, 27);
+  
+    // creates root note trace
+    var trace1 = {
+    x: timeArr,
+    y: rootWave,
+    type: "scatter",
+    name: "Root Note"
+    }
+
+    // creates octave trace
+    var trace2 = {
+    x: timeArr,
+    y: octaveWave,
+    type: "scatter",
+    name: "Octave",
+    opacity: 0.25
+    }
+  
+    // creates fifth trace
+    var trace3 = {
+    x: timeArr,
+    y: fifthWave,
+    type: "scatter",
+    name: "Fifth",
+    opacity: 0.25
+    }
+  
+    // creates third trace
+    var trace4 = {
+    x: timeArr,
+    y: thirdWave,
+    type: "scatter",
+    name: "Third",
+    opacity: 0.25
+    }
+  }
+
+  // displays the frequency of each wave and rounds to 3 decimals
+  let PANEL = d3.select("#frequency-panel2");
+  PANEL.html("");
+  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 1000)/1000 + " Hz");
+
+  var data = [trace1, trace2, trace3, trace4];
+
+  var layout = {
+    title: "<b>Musical Note Sinewaves (Chord Inversions)</b>",
+    xaxis: {title: {text: "Time (ms)"}},
+    yaxis: {title: {text: "Amplitude"}},
+  };
+  
+  // Assigns plot to the html element
+  Plotly.newPlot("plot2", data, layout);  
+}
+
+// event listener for checkboxes
+fifthInvBox.on("change", optionChanged2);
+thirdInvBox.on("change", optionChanged2);
+standardBox.on("change", optionChanged2);
 
 init();
