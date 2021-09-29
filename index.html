@@ -1,4 +1,4 @@
-4<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -88,11 +88,39 @@ between the notes! Chord inversions are a powerful aspect of musical composition
 is one of the most fascinating.
 <br><br>
 If you're curious about how chord inversions add to the depth of the music, listen to this dance classic from 
-<a href="https://www.youtube.com/watch?v=Hf244LCkkLc">Stardust</a>. This is a good example, because the simple 
-chord progression loops several times with the bassline following the lowest note of the chord. Halfway through the 
-song, the bassline begins to play other notes in the chord with magical effect. See if you can spot the switch.
+<a href="https://www.youtube.com/watch?v=Hf244LCkkLc" target = "_blank">Stardust</a>. I like this example, because the simple 
+chord progression loops several times with the bassline following the root note of the chord. At certain points in the  
+song, the bassline begins to play other notes in the chord for a subtle but powerful effect. See if you can spot the switch.
+<br><br>
+Now let's see what the sine waves look like when chords are inverted.
 <br><br>
 </p>
+<div class="row">
+    <div class="col-md-4">
+        <div class="well">
+            <h4>Select a note:</h4>
+        <select id="selectNote" onchange="optionChanged2(this.value)"></select>
+        </div>
+    </div>
+    <div class="col-md-2 col-md-offset-5">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h4 class="panel-title">Frequency Breakdown</h4>
+            </div>
+              <div id="frequency-panel2" class="panel-body">
+            </div>
+        </div>
+    </div>
+</div>
+<div id="plot2"></div>
+<div>
+    <input type="radio" id="fifthInversion" name="fifthInversion" value="fifthInversion">
+<label for="html">5th Inversion</label><br>
+<input type="radio" id="thirdInversion" name="thirdInversion" value="thirdInversion">
+<label for="css">3rd Inversion</label><br>
+</div>
+
+
     
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
 <script src="logic.js"></script>
