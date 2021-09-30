@@ -6,7 +6,7 @@ function init() {
 
 // Dict of notes and their frequencies
 var notes = {"C": 261.626, "C#/Db": 277.183, "D": 293.665, "D#/Eb": 311.127,
-"E": 329.628, "F": 349.228, "F#/Gb": 369.994, "A": 440, "A#/Bb": 466.164,
+"E": 329.628, "F": 349.228, "F#/Gb": 369.994, "G": 391.995, "A": 440, "A#/Bb": 466.164,
 "B": 493.883};
 
 // number of values to generate
@@ -333,10 +333,10 @@ standardBox.on("change", optionChanged2);
 
 const chart = Highcharts.chart('plot3', {
   chart: {
-      type: 'scatter'
+      type: 'line'
   },
   title: {
-      text: 'Instrument Sound Waves'
+      text: '<b>Instrument Sound Waves</b>'
   },
   subtitle: {
       text: 'See the combined harmonics of each instrument'
@@ -359,9 +359,9 @@ const chart = Highcharts.chart('plot3', {
       }
   },
   series: [{
-      //name: 'Time (ms)',
+      name: 'Wave',
       data: makeSine(notes.C, 30),
-      lineWidth: 0.01
+      lineWidth: 2
   }],
   animation: true 
 });
