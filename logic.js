@@ -331,4 +331,40 @@ fifthInvBox.on("change", optionChanged2);
 thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
 
+const chart = Highcharts.chart('plot3', {
+  chart: {
+      type: 'scatter'
+  },
+  title: {
+      text: 'Instrument Sound Waves'
+  },
+  subtitle: {
+      text: 'See the combined harmonics of each instrument'
+  },
+  xAxis: {
+      title: {
+        text: "Time (ms)"
+      }
+  },
+  plotOptions: {
+    series: {
+        marker: {
+            radius: 1
+        }
+    }
+  },
+  yAxis: {
+      title: {
+          text: 'Amplitude'
+      }
+  },
+  series: [{
+      //name: 'Time (ms)',
+      data: makeSine(notes.C, 30),
+      lineWidth: 0.01
+  }],
+  animation: true 
+});
+
+
 init();
