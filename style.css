@@ -6,9 +6,10 @@
   }
 
   .jumbotron {
-    background-image: url("Images/jtron.png");
+    background-image: url("Images/musical-notes-colorful-clipart-lg.png");
     background-size: 100% 100%;
     text-align: center;
+    background-color: rgba(248, 252, 252, 0.5);
 }
 
 .frequency-panel {
@@ -16,10 +17,10 @@
 }
 
 p {
-  margin-top: 100px;
+  margin-top: 50px;
   margin-bottom: 100px;
   margin-right: 150px;
-  margin-left: 80px;
+  margin-left: 50px;
 }
 
 .panel {

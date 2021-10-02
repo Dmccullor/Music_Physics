@@ -64,17 +64,17 @@ function optionChanged(newNote) {
   // displays the frequency of each wave and rounds to 3 decimals
   let PANEL = d3.select("#frequency-panel");
   PANEL.html("");
-  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 100)/100 + " Hz");
 
 
 // creates root note trace
 var trace1 = {
   x: timeArr,
   y: rootWave,
-  type: "scatter",
+  type: "line",
   name: "Root Note"
 }
 
@@ -82,7 +82,7 @@ var trace1 = {
 var trace2 = {
   x: timeArr,
   y: octaveWave,
-  type: "scatter",
+  type: "line",
   name: "Octave",
   opacity: 0.25
 }
@@ -91,7 +91,7 @@ var trace2 = {
 var trace3 = {
   x: timeArr,
   y: fifthWave,
-  type: "scatter",
+  type: "line",
   name: "",
   opacity: 0
 }
@@ -100,7 +100,7 @@ var trace3 = {
 var trace4 = {
   x: timeArr,
   y: thirdWave,
-  type: "scatter",
+  type: "line",
   name: "",
   opacity: 0
 }
@@ -309,10 +309,10 @@ function optionChanged2(newNote) {
   // displays the frequency of each wave and rounds to 3 decimals
   let PANEL = d3.select("#frequency-panel2");
   PANEL.html("");
-  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 1000)/1000 + " Hz");
-  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 1000)/1000 + " Hz");
+  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 100)/100 + " Hz");
 
   var data = [trace1, trace2, trace3, trace4];
 
