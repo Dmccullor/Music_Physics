@@ -331,6 +331,28 @@ fifthInvBox.on("change", optionChanged2);
 thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
 
+//defines the frequency relationship
+var rootFreq = notes.C;
+var secondHarm = rootFreq * 2;
+var thirdHarm = rootFreq * 3;
+var fourthHarm = rootFreq * 4;
+var fifthHarm = rootFreq * 5;
+  
+// builds y values from the makeSine function
+var rootWave = makeSine(rootFreq, 30);
+var secondWave = makeSine(secondHarm, 30);
+var thirdWave = makeSine(thirdHarm, 30);
+var fourthWave = makeSine(fourthHarm, 30);
+var fifthWave = makeSine(fifthHarm, 30);
+
+
+  sum = [];
+  for(var t = 0; t < sampleRate; t++){
+    sum.push(rootWave[t] + secondWave[t] + thirdWave[t] + fourthWave[t] + fifthWave[t]);
+ }
+
+ console.log(sum)
+
 const chart = Highcharts.chart('plot3', {
   chart: {
       type: 'line'
@@ -360,7 +382,7 @@ const chart = Highcharts.chart('plot3', {
   },
   series: [{
       name: 'Wave',
-      data: makeSine(notes.C, 30),
+      data: sum,
       lineWidth: 2
   }],
   animation: true 
