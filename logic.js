@@ -64,7 +64,7 @@ function optionChanged(newNote) {
   // displays the frequency of each wave and rounds to 3 decimals
   let PANEL = d3.select("#frequency-panel");
   PANEL.html("");
-  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Tonic: " + Math.round(selectedFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 100)/100 + " Hz");
@@ -75,7 +75,7 @@ var trace1 = {
   x: timeArr,
   y: rootWave,
   type: "line",
-  name: "Root Note"
+  name: "Tonic"
 }
 
 // creates octave trace
@@ -184,7 +184,7 @@ function optionChanged2(newNote) {
     x: timeArr,
     y: rootWave,
     type: "scatter",
-    name: "Root Note",
+    name: "Tonic",
     opacity: 0.25
     }
 
@@ -230,7 +230,7 @@ function optionChanged2(newNote) {
     x: timeArr,
     y: rootWave,
     type: "scatter",
-    name: "Root Note",
+    name: "Tonic",
     opacity: 0.25
     }
 
@@ -275,7 +275,7 @@ function optionChanged2(newNote) {
     x: timeArr,
     y: rootWave,
     type: "scatter",
-    name: "Root Note"
+    name: "Tonic"
     }
 
     // creates octave trace
@@ -309,7 +309,7 @@ function optionChanged2(newNote) {
   // displays the frequency of each wave and rounds to 3 decimals
   let PANEL = d3.select("#frequency-panel2");
   PANEL.html("");
-  PANEL.append("h6").text("Root Note: " + Math.round(selectedFreq * 100)/100 + " Hz");
+  PANEL.append("h6").text("Tonic: " + Math.round(selectedFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Third: " + Math.round(thirdFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Fifth: " + Math.round(fifthFreq * 100)/100 + " Hz");
   PANEL.append("h6").text("Octave: " + Math.round(octaveFreq * 100)/100 + " Hz");
