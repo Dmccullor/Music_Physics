@@ -5,7 +5,7 @@ function init() {
 };
 
 // Dict of notes and their frequencies
-var notes = {"C": 261.626, "C#/Db": 277.183, "D": 293.665, "D#/Eb": 311.127,
+const notes = {"C": 261.626, "C#/Db": 277.183, "D": 293.665, "D#/Eb": 311.127,
 "E": 329.628, "F": 349.228, "F#/Gb": 369.994, "G": 391.995, "A": 440, "A#/Bb": 466.164,
 "B": 493.883};
 
@@ -331,19 +331,36 @@ fifthInvBox.on("change", optionChanged2);
 thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
 
+// instrument data object
+const instruments = {
+  "French Horn": [{"First": 1, "Second": 0.395, "Third": 0.235,"Fourth": 0.222,
+  "Fifth": 0.065, "Sixth": 0.055, "Seventh": 0.065, "Eighth": 0.055, "Ninth": 0.045,
+  "Tenth": 0.035}],
+  "Flute": [{"First": 1, "Second": 9.75, "Third": 3.75, "Fourth": 1.82, "Fifth": 0.45,
+  "Sixth": 0.11, "Seventh": 0, "Eighth": 0.02, "Ninth": 0, "Tenth": 0}],
+  "Oboe": [{"First": 1, "Second": 0.95, "Third": 2.1, "Fourth": 0.195, "Fifth": 0.2,
+  "Sixth": 0.25, "Seventh": 0.55, "Eighth": 0.295, "Ninth": 0.235, "Tenth": 0}],
+  "Clarinet": [{"First": 1.0, "Second": 0.36, "Third": 0.26, "Fourth": 0.01, 
+  "Fifth": 0.75, "Sixth": 0.2, "Seventh": 0.02, "Eighth": 0, "Ninth": 0, "Tenth": 0}],
+  "Guitar": [{"First": 1, "Second": 0.68, "Third": 1.26, "Fourth": 0.13, "Fifth": 0.13,
+  "Sixth": 0.11, "Seventh": 0, "Eighth": 0.02, "Ninth": 0.2, "Tenth": 0.06}],
+  "Piano": [{"First": 1, "Second": 0.11, "Third": 0.33, "Fourth": 0.06, "Fifth": 0.05,
+  "Sixth": 0.04, "Seventh": 0, "Eighth": 0.02, "Ninth": 0, "Tenth": 0}]
+}
+
 //defines the frequency relationship
-var rootFreq = notes.C;
+var rootFreq = notes.A;
 var secondHarm = rootFreq * 2;
 var thirdHarm = rootFreq * 3;
 var fourthHarm = rootFreq * 4;
 var fifthHarm = rootFreq * 5;
   
 // builds y values from the makeSine function
-var rootWave = makeSine(rootFreq, 30);
-var secondWave = makeSine(secondHarm, 30);
-var thirdWave = makeSine(thirdHarm, 30);
-var fourthWave = makeSine(fourthHarm, 30);
-var fifthWave = makeSine(fifthHarm, 30);
+var rootWave = makeSine(rootFreq, 1);
+var secondWave = makeSine(secondHarm, 0.395);
+var thirdWave = makeSine(thirdHarm, 0.235);
+var fourthWave = makeSine(fourthHarm, 0.222);
+var fifthWave = makeSine(fifthHarm, 0.065);
 
 
   sum = [];
