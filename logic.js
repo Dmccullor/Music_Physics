@@ -159,7 +159,10 @@ var standardBox = d3.select("#standardChord");
 var fifthInvBox = d3.select("#fifthInversion");
 var thirdInvBox = d3.select("#thirdInversion");
 
-function optionChanged2(selectedFreq) {
+function optionChanged2() {
+  var dropDownMenu = d3.select("#selNote2").node();
+  var selectedFreq = dropDownMenu.value;
+  
   let octaveFreq = selectedFreq * 2;
   
   // builds y values based on the inversion selection
@@ -326,6 +329,7 @@ thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
 
 
+
 // instrument data object
 var instruments = [{"name": "French Horn", "fourierArr": [1,0.395,0.235,0.222,0.065,0.055]},
   {"name": "Flute", "fourierArr": [1,9.75,3.75,1.82,0.45,0.11]},
@@ -359,17 +363,17 @@ function instChanged(instrument) {
   var resultArr = result[0].fourierArr;
 
   // builds y values of each harmonic from the makeSine function
-  var rootWave = makeSine(rootFreq, resultArr[0]);
-  var secondWave = makeSine(secondHarm, resultArr[1]);
-  var thirdWave = makeSine(thirdHarm, resultArr[2]);
-  var fourthWave = makeSine(fourthHarm, resultArr[3]);
-  var fifthWave = makeSine(fifthHarm, resultArr[4]);
-  var sixthWave = makeSine(sixthHarm, resultArr[5]);
+  var rootHarmWave = makeSine(rootFreq, resultArr[0]);
+  var secondHarmWave = makeSine(secondHarm, resultArr[1]);
+  var thirdHarmWave = makeSine(thirdHarm, resultArr[2]);
+  var fourthHarmWave = makeSine(fourthHarm, resultArr[3]);
+  var fifthHarmWave = makeSine(fifthHarm, resultArr[4]);
+  var sixthHarmWave = makeSine(sixthHarm, resultArr[5]);
 
   //Sums the values of each overtones' value
   var sum = [];
   for(var t = 0; t < sampleRate; t++) {
-    sum.push(rootWave[t] + secondWave[t] + thirdWave[t] + fourthWave[t] + fifthWave[t] + sixthWave[t]);
+    sum.push(rootHarmWave[t] + secondHarmWave[t] + thirdHarmWave[t] + fourthHarmWave[t] + fifthHarmWave[t] + sixthHarmWave[t]);
   }
   
   // builds soundwave chart
