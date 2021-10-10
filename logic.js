@@ -1,7 +1,8 @@
 // Function to display defaults on the page when it loads
 function init() {
-  optionChanged(notes.C)
-  optionChanged2(notes.C)
+  optionChanged(notes.C),
+  optionChanged2(notes.C),
+  instChanged(instruments[0].name)
 };
 
 // Dict of notes and their frequencies
@@ -41,14 +42,10 @@ var fifthBox = d3.select("#myCheckBox");
 var thirdBox = d3.select("#myCheckBox2");
 
 // builds the plot from the selected notes' frequency
-function optionChanged(newNote) {
+function optionChanged(selectedFreq) {
   // resets the check boxes when note is changed
   fifthBox.property('checked', false);
   thirdBox.property('checked', false);
-
-  // reads the selected option and defines the note and frequency as variables
-  let dropDownMenu = d3.selectAll("#selNote").node();
-  let selectedFreq = dropDownMenu.value;
 
   //defines the frequency relationship
   let octaveFreq = selectedFreq * 2;
@@ -162,10 +159,7 @@ var standardBox = d3.select("#standardChord");
 var fifthInvBox = d3.select("#fifthInversion");
 var thirdInvBox = d3.select("#thirdInversion");
 
-function optionChanged2(newNote) {
-  // reads the selected option and defines the note and frequency as variables
-  let dropDownMenu = d3.selectAll("#selNote2").node();
-  let selectedFreq = dropDownMenu.value;
+function optionChanged2(selectedFreq) {
   let octaveFreq = selectedFreq * 2;
   
   // builds y values based on the inversion selection
@@ -331,79 +325,125 @@ fifthInvBox.on("change", optionChanged2);
 thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
 
-// instrument data object
-const instruments = {
-  "French Horn": [{"First": 1, "Second": 0.395, "Third": 0.235,"Fourth": 0.222,
-  "Fifth": 0.065, "Sixth": 0.055, "Seventh": 0.065, "Eighth": 0.055, "Ninth": 0.045,
-  "Tenth": 0.035}],
-  "Flute": [{"First": 1, "Second": 9.75, "Third": 3.75, "Fourth": 1.82, "Fifth": 0.45,
-  "Sixth": 0.11, "Seventh": 0, "Eighth": 0.02, "Ninth": 0, "Tenth": 0}],
-  "Oboe": [{"First": 1, "Second": 0.95, "Third": 2.1, "Fourth": 0.195, "Fifth": 0.2,
-  "Sixth": 0.25, "Seventh": 0.55, "Eighth": 0.295, "Ninth": 0.235, "Tenth": 0}],
-  "Clarinet": [{"First": 1.0, "Second": 0.36, "Third": 0.26, "Fourth": 0.01, 
-  "Fifth": 0.75, "Sixth": 0.2, "Seventh": 0.02, "Eighth": 0, "Ninth": 0, "Tenth": 0}],
-  "Guitar": [{"First": 1, "Second": 0.68, "Third": 1.26, "Fourth": 0.13, "Fifth": 0.13,
-  "Sixth": 0.11, "Seventh": 0, "Eighth": 0.02, "Ninth": 0.2, "Tenth": 0.06}],
-  "Piano": [{"First": 1, "Second": 0.11, "Third": 0.33, "Fourth": 0.06, "Fifth": 0.05,
-  "Sixth": 0.04, "Seventh": 0, "Eighth": 0.02, "Ninth": 0, "Tenth": 0}]
-}
 
-//defines the frequency relationship
+// instrument data object
+var instruments = [{"name": "French Horn", "fourierArr": [1,0.395,0.235,0.222,0.065,0.055]},
+  {"name": "Flute", "fourierArr": [1,9.75,3.75,1.82,0.45,0.11]},
+  {"name": "Oboe", "fourierArr": [1,0.95,2.1,0.195,0.2,0.25]},
+  {"name": "Clarinet", "fourierArr": [1,0.36,0.26,0.01,0.75,0.2]},
+  {"name": "Guitar", "fourierArr": [1,0.68,1.26,0.13,0.13,0.11]},
+  {"name": "Piano", "fourierArr": [1,0.11,0.33,0.06,0.05,0.04]}
+];
+
+//defines the frequency relationship for instrument chart
 var rootFreq = notes.A;
 var secondHarm = rootFreq * 2;
 var thirdHarm = rootFreq * 3;
 var fourthHarm = rootFreq * 4;
 var fifthHarm = rootFreq * 5;
+var sixthHarm = rootFreq * 6;
+
+//populates the instrument dropdown menu
+var instSelector = d3.select("#selInst");
+for (u = 0; u < instruments.length; u++) {
+  instSelector
+    .append("option")
+    .text(instruments[u].name)
+    .property("value", instruments[u].name)
+};
+
+// performs actions from instrument dropdown menu
+function instChanged(instrument) {
+  //matches the fourier array to the selected instrument
+  var result = instruments.filter(selection => selection.name == instrument);
+  var resultArr = result[0].fourierArr;
+
+  // builds y values of each harmonic from the makeSine function
+  var rootWave = makeSine(rootFreq, resultArr[0]);
+  var secondWave = makeSine(secondHarm, resultArr[1]);
+  var thirdWave = makeSine(thirdHarm, resultArr[2]);
+  var fourthWave = makeSine(fourthHarm, resultArr[3]);
+  var fifthWave = makeSine(fifthHarm, resultArr[4]);
+  var sixthWave = makeSine(sixthHarm, resultArr[5]);
+
+  //Sums the values of each overtones' value
+  var sum = [];
+  for(var t = 0; t < sampleRate; t++) {
+    sum.push(rootWave[t] + secondWave[t] + thirdWave[t] + fourthWave[t] + fifthWave[t] + sixthWave[t]);
+  }
   
-// builds y values from the makeSine function
-var rootWave = makeSine(rootFreq, 1);
-var secondWave = makeSine(secondHarm, 0.395);
-var thirdWave = makeSine(thirdHarm, 0.235);
-var fourthWave = makeSine(fourthHarm, 0.222);
-var fifthWave = makeSine(fifthHarm, 0.065);
-
-
-  sum = [];
-  for(var t = 0; t < sampleRate; t++){
-    sum.push(rootWave[t] + secondWave[t] + thirdWave[t] + fourthWave[t] + fifthWave[t]);
- }
-
- console.log(sum)
-
-const chart = Highcharts.chart('plot3', {
-  chart: {
-      type: 'line'
-  },
-  title: {
-      text: '<b>Instrument Sound Waves</b>'
-  },
-  subtitle: {
-      text: 'See the combined harmonics of each instrument'
-  },
-  xAxis: {
-      title: {
-        text: "Time (ms)"
+  // builds soundwave chart
+  var chart = Highcharts.chart('plot3', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '<b>Instrument Sound Waves</b>'
+    },
+    subtitle: {
+        text: 'See the combined harmonics of each instrument'
+    },
+    // xAxis: {
+    //     title: {
+    //       text: "Time (ms)"
+    //     }
+    // },
+    plotOptions: {
+      series: {
+          marker: {
+              radius: 1
+          },
+          turboThreshold: 2500
       }
-  },
-  plotOptions: {
-    series: {
-        marker: {
-            radius: 1
+    },
+    yAxis: {
+        title: {
+            text: 'Amplitude'
         }
-    }
-  },
-  yAxis: {
-      title: {
-          text: 'Amplitude'
-      }
-  },
-  series: [{
-      name: 'Wave',
+    },
+    series: [{
+      name: result[0].name,
       data: sum,
-      lineWidth: 2
-  }],
-  animation: true 
-});
-
+      linewidth: 2
+    }],
+    animation: true 
+  });
+  
+  // build bar chart
+  var chart2 = Highcharts.chart('plot4', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: '<b>Instrument Fourier Analysis</b>'
+    },
+    subtitle: {
+        text: 'The Strength of Overtones'
+    },
+    // xAxis: {
+    //     title: {
+    //       text: "Time (ms)"
+    //     }
+    // },
+    plotOptions: {
+      series: {
+          marker: {
+              radius: 1
+          },
+          turboThreshold: 2500
+      }
+    },
+    yAxis: {
+        title: {
+            text: 'Amplitude'
+        }
+    },
+    series: [{
+      name: result[0].name,
+      data: resultArr
+    }],
+    animation: true 
+  });
+}
 
 init();

@@ -58,9 +58,10 @@
     C Major Chord
 <br>
     <audio controls><source src="Audio/c-major-chord.mp3" type="audio/mpeg">Your browser does not support the audio tag.</audio>
+</p>
     <br><br>
     <b>Note: The frequency on the x-axis and amplitude on the y-axis are independent of one another, but have been adjusted for visual clarity.</b>
-</p>
+
 <div class="row">
     <div class="col-md-4">
         <div class="well">
@@ -183,7 +184,22 @@
 <p>
 
 </p>
-<div id="plot3"></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="well">
+            <h4>Select an Instrument:</h4>
+        <select id="selInst" onchange="instChanged(this.value)"></select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div id="plot3"></div>
+    </div>
+    <div class="col-md-4">
+        <div id="plot4"></div>
+    </div>
+</div>
 <br><br>
 <img src="Images/music-notes-colourful.jpeg" class="center2">
 
