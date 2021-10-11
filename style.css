@@ -27,6 +27,11 @@
   padding: 10px 10px 10px 10px;
 }
 
+.left {
+  float: left;
+  padding: 10px 10px 10px 10px;
+}
+
 p {
   margin-top: 50px;
   margin-bottom: 50px;

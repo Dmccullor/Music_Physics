@@ -53,15 +53,15 @@
     Sitting right between the <em>tonic</em>(the first note in the scale) and the 5th is the (major)3rd. On the A scale that note would be C# with a frequency of 550 Hz. All of these notes played together
     is called a major <em>chord</em>. The major chord of any note has the same intervals between the notes. The A major chord is A C# E A. The C major chord is C E G C.
     Play around with the chart below to see how all of the notes look when mapped as a sine wave. Notice that the octave, which is shown by default, takes half the time
-    to make its oscillation (also known as the <em>period</em>) as the tonic note. Tick the checkboxes below the chart to add the 5th and 3rd sinewaves.
+    to make its oscillation (also known as the <em>period</em>) as the tonic note. Tick the checkboxes to add the 5th and 3rd sinewaves.
 <br><br>
-    C Major Chord
+    &nbsp;&nbsp;&nbsp;C Major Chord
 <br>
     <audio controls><source src="Audio/c-major-chord.mp3" type="audio/mpeg">Your browser does not support the audio tag.</audio>
 </p>
     <br><br>
     <b>Note: The frequency on the x-axis and amplitude on the y-axis are independent of one another, but have been adjusted for visual clarity.</b>
-
+    <br><br>
 <div class="row">
     <div class="col-md-4">
         <div class="well">
@@ -69,7 +69,14 @@
         <select id="selNote" onchange="optionChanged(this.value)"></select>
         </div>
     </div>
-    <div class="col-md-2 col-md-offset-5">
+    <div class="col-md-4 col-md-offset-1">
+        <br>
+        <input type="checkbox" id="myCheckBox" unchecked>
+        <label for="myCheckBox">Add the 5th</label><br>
+        <input type="checkbox" id="myCheckBox2" unchecked>
+        <label for="myCheckBox2">Add the 3rd</label>
+    </div>
+    <div class="col-md-2">
         <div class="panel panel-primary">
             <div class="panel-heading">
               <h4 class="panel-title">Frequency Breakdown</h4>
@@ -80,12 +87,6 @@
     </div>
 </div>
 <div id="plot"></div>
-<div>
-    <input type="checkbox" id="myCheckBox" unchecked>
-    <label for="myCheckBox">Add the 5th</label><br>
-    <input type="checkbox" id="myCheckBox2" unchecked>
-    <label for="myCheckBox2">Add the 3rd</label>
-</div>
 <br><br>
 <h2>Chord Inversions</h2>
 <p>
@@ -97,12 +98,12 @@
     between the notes! Chord inversions are a powerful aspect of musical composition and its natural interpretation
     is one of the most fascinating.
 <br><br>
-    C Major: 1st Inversion<br>
+    &nbsp;&nbsp;&nbsp;C Major: 1st Inversion<br>
     <audio controls><source src="https://makingmusicmag.com/wp-content/uploads/2018/08/Inversions-1.mp3?_=1" type="audio/mpeg">Your browser does not support the audio tag.</audio>
 <br>
-    C Major: 2nd Inversion
+    &nbsp;&nbsp;&nbsp;C Major: 2nd Inversion
 <br>
-<audio controls><source src="https://arthurfoxmusic.com/wp-content/uploads/2018/05/C-Major-Second-Inversion-Arthur-Fox-Music-Triads-and-Pseudo-Triads.mp3" type="audio/mpeg">Your browser does not support the audio tag.</audio>
+    <audio controls><source src="https://arthurfoxmusic.com/wp-content/uploads/2018/05/C-Major-Second-Inversion-Arthur-Fox-Music-Triads-and-Pseudo-Triads.mp3" type="audio/mpeg">Your browser does not support the audio tag.</audio>
 <br><br>
     If you're curious about how chord inversions add to the depth of the music, listen to this dance classic from 
     <a href="https://www.youtube.com/watch?v=Hf244LCkkLc" target = "_blank">Stardust</a>. I like this example, because the simple 
@@ -119,7 +120,16 @@
         <select id="selNote2" onchange="optionChanged2(this.value)"></select>
         </div>
     </div>
-    <div class="col-md-2 col-md-offset-5">
+    <br>
+    <div class="col-md-4 col-md-offset-1">
+        <input type="radio" id="standardChord" name="inversion" value="standardChord">
+        <label for="standardChord">Standard Chord</label><br>
+        <input type="radio" id="fifthInversion" name="inversion" value="fifthInversion">
+        <label for="fifthInvesion">5th Inversion</label><br>
+        <input type="radio" id="thirdInversion" name="inversion" value="thirdInversion">
+        <label for="thirdInversion">3rd Inversion</label><br>
+    </div>
+    <div class="col-md-2">
         <div class="panel panel-primary">
             <div class="panel-heading">
               <h4 class="panel-title">Frequency Breakdown</h4>
@@ -130,14 +140,6 @@
     </div>
 </div>
 <div id="plot2"></div>
-<div>
-    <input type="radio" id="standardChord" name="inversion" value="standardChord">
-    <label for="standardChord">Standard Chord</label><br>
-    <input type="radio" id="fifthInversion" name="inversion" value="fifthInversion">
-    <label for="fifthInvesion">5th Inversion</label><br>
-    <input type="radio" id="thirdInversion" name="inversion" value="thirdInversion">
-    <label for="thirdInversion">3rd Inversion</label><br>
-</div>
 <br><br>
 <h2><b>Harmonic Overtones</b></h2>
 <p>
@@ -182,7 +184,20 @@
 <h2>Instrument Timbre</h2>
 <br><br>
 <p>
-
+    These natural overtones also come into play when talking about the different sounds that instruments make. The quality of the sound that come
+    from instruments is called its <em>timbre</em> (pronounced <b>tam-bur</b>). Different instruments resonate with overtones with different strengths.
+    The result is a highly variable pallette of sounds that add depth to an arrangement of players.
+    <br><br>
+</p>
+    <img src="Images/combined_wave.png" align="left" style="margin: 20px 10px 0px 20px">
+<p>
+    This image shows the combined wave or the root note and the octave. The two sine waves are summed into a combined sound wave as positve values and 
+    negative values cancel each other out. When different instruments produce various amplitudes of resonating harmonics, different sound 
+    waves are produced. The amplitudes of each overtone can be analyzed and collected into a Fourier Analysis, named after the French mathematician
+    Joseph Fourier.
+<br><br>
+    The graphs below show the sound waves of a selection of instruments, all playing the note middle A (440 Hz), and an instance of time with the amplitude
+    of each harmonic.
 </p>
 <div class="row">
     <div class="col-md-4">
@@ -201,6 +216,12 @@
     </div>
 </div>
 <br><br>
+<p>
+    From here, the entire system of music theory can be derived. Harmonic progression, key 
+    modulation and melody are all built on this foundation. In the words of the great 
+    <a href="https://www.youtube.com/watch?v=hmKshpLXnxE" target="_blank">Stevie Wonder</a>...
+</p>
+<h2 align="center">"Music is a world within itself with a language we all understand"</h2>
 <img src="Images/music-notes-colourful.jpeg" class="center2">
 
     

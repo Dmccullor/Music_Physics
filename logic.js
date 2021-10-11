@@ -378,32 +378,19 @@ function instChanged(instrument) {
   
   // builds soundwave chart
   var chart = Highcharts.chart('plot3', {
-    chart: {
-        type: 'line'
+    chart: {type: 'line'},
+    title: {text: '<b>Instrument Sound Waves</b>'},
+    subtitle: {text: 'See the combined harmonics of each instrument'},
+    xAxis: {
+        title: {text: "Time"}
     },
-    title: {
-        text: '<b>Instrument Sound Waves</b>'
-    },
-    subtitle: {
-        text: 'See the combined harmonics of each instrument'
-    },
-    // xAxis: {
-    //     title: {
-    //       text: "Time (ms)"
-    //     }
-    // },
     plotOptions: {
       series: {
-          marker: {
-              radius: 1
-          },
-          turboThreshold: 2500
-      }
+          marker: {radius: 1},
+          turboThreshold: 2500}
     },
     yAxis: {
-        title: {
-            text: 'Amplitude'
-        }
+        title: {text: 'Amplitude'}
     },
     series: [{
       name: result[0].name,
@@ -415,38 +402,27 @@ function instChanged(instrument) {
   
   // build bar chart
   var chart2 = Highcharts.chart('plot4', {
-    chart: {
-        type: 'bar'
+    chart: {type: 'column',
+      animation: true},
+    title: {text: '<b>Instrument Fourier Analysis</b>'},
+    subtitle: {text: 'The Strength of Overtones'},
+    xAxis: {
+        categories: ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'],
+        title: {text: "Harmonic Number"}
     },
-    title: {
-        text: '<b>Instrument Fourier Analysis</b>'
-    },
-    subtitle: {
-        text: 'The Strength of Overtones'
-    },
-    // xAxis: {
-    //     title: {
-    //       text: "Time (ms)"
-    //     }
-    // },
     plotOptions: {
       series: {
-          marker: {
-              radius: 1
-          },
-          turboThreshold: 2500
-      }
+          marker: {radius: 1},
+          turboThreshold: 2500}
     },
     yAxis: {
-        title: {
-            text: 'Amplitude'
-        }
+        title: {text: 'Amplitude'}
     },
     series: [{
       name: result[0].name,
       data: resultArr
     }],
-    animation: true 
+
   });
 }
 
