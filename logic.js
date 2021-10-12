@@ -407,7 +407,7 @@ function instChanged(instrument) {
     title: {text: '<b>Instrument Fourier Analysis</b>'},
     subtitle: {text: 'The Strength of Overtones'},
     xAxis: {
-        categories: ['Fundamental', 'First', 'Second', 'Third', 'Fourth', 'Fifth'],
+        categories: ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'],
         title: {text: "Harmonic Number"}
     },
     plotOptions: {
