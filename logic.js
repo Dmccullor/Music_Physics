@@ -331,12 +331,14 @@ standardBox.on("change", optionChanged2);
 
 
 // instrument data object
-var instruments = [{"name": "French Horn", "fourierArr": [1,0.395,0.235,0.222,0.065,0.055]},
+var instruments = [{"name": "Sine", "fourierArr": [1,0,0,0,0,0]},
+  {"name": "French Horn", "fourierArr": [1,0.395,0.235,0.222,0.065,0.055]},
   {"name": "Flute", "fourierArr": [1,9.75,3.75,1.82,0.45,0.11]},
   {"name": "Oboe", "fourierArr": [1,0.95,2.1,0.195,0.2,0.25]},
   {"name": "Clarinet", "fourierArr": [1,0.36,0.26,0.01,0.75,0.2]},
   {"name": "Guitar", "fourierArr": [1,0.68,1.26,0.13,0.13,0.11]},
-  {"name": "Piano", "fourierArr": [1,0.11,0.33,0.06,0.05,0.04]}
+  {"name": "Piano", "fourierArr": [1,0.11,0.33,0.06,0.05,0.04]},
+  {"name": "Violin", "fourierArr": [14, 8.43, 9.29, 0.9, 0.75, 0]}
 ];
 
 //defines the frequency relationship for instrument chart
@@ -355,6 +357,54 @@ for (u = 0; u < instruments.length; u++) {
     .text(instruments[u].name)
     .property("value", instruments[u].name)
 };
+
+// builds soundwave chart
+var soundChart = Highcharts.chart('plot3', {
+  chart: {type: 'line'},
+  title: {text: '<b>Instrument Sound Waves</b>'},
+  subtitle: {text: 'See the combined harmonics of each instrument'},
+  xAxis: {
+      title: {text: "Time"}
+  },
+  plotOptions: {
+    series: {
+        marker: {radius: 1},
+        turboThreshold: 2500}
+  },
+  yAxis: {
+      title: {text: 'Amplitude'}
+  },
+  series: [{
+    name: "Sine",
+    data: makeSine(notes.A),
+    linewidth: 2
+  }],
+  animation: true 
+});
+  
+// build bar chart
+var fourierChart = Highcharts.chart('plot4', {
+  chart: {type: 'column',
+    animation: true},
+  title: {text: '<b>Instrument Fourier Analysis</b>'},
+  subtitle: {text: 'The Strength of Overtones'},
+  xAxis: {
+      categories: ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'],
+      title: {text: "Harmonic Number"}
+  },
+  plotOptions: {
+    series: {
+        marker: {radius: 1},
+        turboThreshold: 2500}
+  },
+  yAxis: {
+      title: {text: 'Amplitude'}
+  },
+  series: [{
+    name: "Sine",
+    data: [1,0,0,0,0,0]
+  }],
+});
 
 // performs actions from instrument dropdown menu
 function instChanged(instrument) {
@@ -376,53 +426,18 @@ function instChanged(instrument) {
     sum.push(rootHarmWave[t] + secondHarmWave[t] + thirdHarmWave[t] + fourthHarmWave[t] + fifthHarmWave[t] + sixthHarmWave[t]);
   }
   
-  // builds soundwave chart
-  var chart = Highcharts.chart('plot3', {
-    chart: {type: 'line'},
-    title: {text: '<b>Instrument Sound Waves</b>'},
-    subtitle: {text: 'See the combined harmonics of each instrument'},
-    xAxis: {
-        title: {text: "Time"}
-    },
-    plotOptions: {
-      series: {
-          marker: {radius: 1},
-          turboThreshold: 2500}
-    },
-    yAxis: {
-        title: {text: 'Amplitude'}
-    },
+  soundChart.update({
     series: [{
       name: result[0].name,
-      data: sum,
-      linewidth: 2
-    }],
-    animation: true 
+      data: sum
+    }]
   });
-  
-  // build bar chart
-  var chart2 = Highcharts.chart('plot4', {
-    chart: {type: 'column',
-      animation: true},
-    title: {text: '<b>Instrument Fourier Analysis</b>'},
-    subtitle: {text: 'The Strength of Overtones'},
-    xAxis: {
-        categories: ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth'],
-        title: {text: "Harmonic Number"}
-    },
-    plotOptions: {
-      series: {
-          marker: {radius: 1},
-          turboThreshold: 2500}
-    },
-    yAxis: {
-        title: {text: 'Amplitude'}
-    },
+
+  fourierChart.update({
     series: [{
       name: result[0].name,
       data: resultArr
-    }],
-
+    }]
   });
 }
 
