@@ -72,7 +72,8 @@ var trace1 = {
   x: timeArr,
   y: rootWave,
   type: "line",
-  name: "Tonic"
+  name: "Tonic",
+  hoverinfo: 'name'
 }
 
 // creates octave trace
@@ -81,7 +82,8 @@ var trace2 = {
   y: octaveWave,
   type: "line",
   name: "Octave",
-  opacity: 0.25
+  opacity: 0.25,
+  hoverinfo: 'name'
 }
 
 // creates fifth trace
@@ -90,7 +92,8 @@ var trace3 = {
   y: fifthWave,
   type: "line",
   name: "",
-  opacity: 0
+  opacity: 0,
+  hoverinfo: 'skip'
 }
 
 // creates third trace
@@ -99,7 +102,8 @@ var trace4 = {
   y: thirdWave,
   type: "line",
   name: "",
-  opacity: 0
+  opacity: 0,
+  hoverinfo: 'skip'
 }
 
 
@@ -108,8 +112,7 @@ var data = [trace1, trace2, trace3, trace4];
 var layout = {
   title: "<b>Musical Note Sinewaves</b>",
   xaxis: {title: {text: "Time (ms)"}},
-  yaxis: {title: {text: "Amplitude"}},
-  hovermode: "closest"
+  yaxis: {title: {text: "Amplitude"}}
 };
   
 // Assigns plot to the html element
@@ -117,9 +120,9 @@ Plotly.newPlot("plot", data, layout);
 }
 
 // what is added to the fifth and third traces when box is checked
-var updateFifth = {opacity: 0.25, name: "Fifth"};
-var updateHide = {opacity: 0, name: ""};
-var updateThird = {opacity: 0.25, name: "Third"}
+var updateFifth = {opacity: 0.25, name: "Fifth", hoverinfo: 'name'};
+var updateHide = {opacity: 0, name: "", hoverinfo: 'skip'};
+var updateThird = {opacity: 0.25, name: "Third", hoverinfo: 'name'}
 
 // makes the fifth wave appear and disappear when box is clicked
 function replotFifth() {
@@ -182,7 +185,8 @@ function optionChanged2() {
     y: rootWave,
     type: "scatter",
     name: "Tonic",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
 
     // creates octave trace
@@ -191,7 +195,8 @@ function optionChanged2() {
     y: octaveWave,
     type: "scatter",
     name: "Octave",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
       
     // creates fifth trace
@@ -199,7 +204,8 @@ function optionChanged2() {
     x: timeArr,
     y: fifthWave,
     type: "scatter",
-    name: "Inv. Fifth"
+    name: "Inv. Fifth",
+    hoverinfo: 'name'
     }
       
     // creates third trace
@@ -208,7 +214,8 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
   }
   else if(thirdInvBox.property("checked")) {
@@ -228,7 +235,8 @@ function optionChanged2() {
     y: rootWave,
     type: "scatter",
     name: "Tonic",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
 
     // creates octave trace
@@ -237,7 +245,8 @@ function optionChanged2() {
     y: octaveWave,
     type: "scatter",
     name: "Octave",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
       
     // creates fifth trace
@@ -246,7 +255,8 @@ function optionChanged2() {
     y: fifthWave,
     type: "scatter",
     name: "Fifth",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
       
     // creates third trace
@@ -255,6 +265,7 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Inv. Third",
+    hoverinfo: 'name'
     }
   }
   else {
@@ -272,7 +283,8 @@ function optionChanged2() {
     x: timeArr,
     y: rootWave,
     type: "scatter",
-    name: "Tonic"
+    name: "Tonic",
+    hoverinfo: 'name'
     }
 
     // creates octave trace
@@ -281,7 +293,8 @@ function optionChanged2() {
     y: octaveWave,
     type: "scatter",
     name: "Octave",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
   
     // creates fifth trace
@@ -290,7 +303,8 @@ function optionChanged2() {
     y: fifthWave,
     type: "scatter",
     name: "Fifth",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
   
     // creates third trace
@@ -299,7 +313,8 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
-    opacity: 0.25
+    opacity: 0.25,
+    hoverinfo: 'name'
     }
   }
 
