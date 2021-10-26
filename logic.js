@@ -101,6 +101,7 @@ var trace4 = {
   x: timeArr,
   y: thirdWave,
   type: "line",
+  line: {color: "cyan"},
   name: "",
   opacity: 0,
   hoverinfo: 'skip'
@@ -214,6 +215,7 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
+    line: {color: "cyan"},
     opacity: 0.25,
     hoverinfo: 'name'
     }
@@ -265,6 +267,7 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Inv. Third",
+    line: {color: "cyan"},
     hoverinfo: 'name'
     }
   }
@@ -313,6 +316,7 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
+    line: {color: "cyan"},
     opacity: 0.25,
     hoverinfo: 'name'
     }
