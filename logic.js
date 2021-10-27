@@ -101,7 +101,6 @@ var trace4 = {
   x: timeArr,
   y: thirdWave,
   type: "line",
-  line: {color: "cyan"},
   name: "",
   opacity: 0,
   hoverinfo: 'skip'
@@ -129,9 +128,11 @@ var updateThird = {opacity: 0.25, name: "Third", hoverinfo: 'name'}
 function replotFifth() {
   if (fifthBox.property("checked")) {
     Plotly.restyle("plot", updateFifth, 2);
+    replotColorblind();
   }
   else {
     Plotly.restyle("plot", updateHide, 2);
+    replotColorblind();
   }
 };
 
@@ -139,9 +140,11 @@ function replotFifth() {
 function replotThird() {
   if (thirdBox.property("checked")) {
     Plotly.restyle("plot", updateThird, 3);
+    replotColorblind();
   }
   else {
     Plotly.restyle("plot", updateHide, 3);
+    replotColorblind();
   }
 }
 
