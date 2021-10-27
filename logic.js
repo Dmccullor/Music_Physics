@@ -163,6 +163,7 @@ var standardBox = d3.select("#standardChord");
 var fifthInvBox = d3.select("#fifthInversion");
 var thirdInvBox = d3.select("#thirdInversion");
 
+// builds the plot from the selected notes' frequency
 function optionChanged2() {
   var dropDownMenu = d3.select("#selNote2").node();
   var selectedFreq = dropDownMenu.value;
@@ -215,7 +216,6 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
-    line: {color: "cyan"},
     opacity: 0.25,
     hoverinfo: 'name'
     }
@@ -267,7 +267,6 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Inv. Third",
-    line: {color: "cyan"},
     hoverinfo: 'name'
     }
   }
@@ -316,7 +315,6 @@ function optionChanged2() {
     y: thirdWave,
     type: "scatter",
     name: "Third",
-    line: {color: "cyan"},
     opacity: 0.25,
     hoverinfo: 'name'
     }
@@ -339,13 +337,37 @@ function optionChanged2() {
   };
   
   // Assigns plot to the html element
-  Plotly.newPlot("plot2", data, layout);  
+  Plotly.newPlot("plot2", data, layout);
+  // call function to check for colorblind switch
+  replotColorblind(); 
 }
 
 // event listener for checkboxes
 fifthInvBox.on("change", optionChanged2);
 thirdInvBox.on("change", optionChanged2);
 standardBox.on("change", optionChanged2);
+
+// defines variable for colorblind switch
+var colorblindBox = d3.select("#switch");
+
+// what is changed when colorblind switch is toggled
+var updateColorblind = {line: {color: "cyan"}};
+var updateNormalcolors = {line: {color: ""}};
+
+// changes the color of the third to be colorblind friendly
+function replotColorblind() {
+  if (colorblindBox.property("checked")) {
+    Plotly.restyle("plot", updateColorblind, 3);
+    Plotly.restyle("plot2", updateColorblind, 3);
+  }
+  else {
+    Plotly.restyle("plot", updateNormalcolors, 3);
+    Plotly.restyle("plot2", updateNormalcolors, 3);
+  }
+}
+
+// event listener for colorblind switch
+colorblindBox.on("change", replotColorblind);
 
 
 
